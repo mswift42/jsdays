@@ -1,0 +1,10 @@
+"use strict";
+var U = {};
+U.prototype.$ = function() {
+    var target = this.charAt(0);
+    if (target === '#') {
+        return document.getElementById(this.substring(1));
+    }
+    return document.getElementsByClassName(this.substring(1));
+    
+};
