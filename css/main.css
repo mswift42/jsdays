@@ -2,4 +2,10 @@ body {
     margin-top:80px;
     background:url(oldlace1.png);
     background-color:oldlace;
-    }
+}
+
+#header {
+    text-align:center;
+    text-shadow: 1px 1px; #202020;
+
+}
