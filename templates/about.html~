@@ -1,0 +1,33 @@
+<!doctype HTML>
+<head>
+  <title>DAYS - About</title>
+</head>
+<body>
+    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="/">Tasks</a>
+          </li>
+          <li>
+            <a href="/newtask">New Task</a>
+          </li>
+          <li>
+            <a href="/about">About</a>
+          </li>
+        </ul>
+        <div class="bannerheader">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active navbar-right">
+            <p class="navbar-text"><strong>DAYS - Do All Your Stuff</strong></p>
+          </li>
+        </ul>
+        </div>
+      </div>
+    </div>
+    </nav>
+    <header>
+      <h2 id="header">About</h2>h2>
+    </header>
+</body>
