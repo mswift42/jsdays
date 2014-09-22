@@ -1,7 +1,6 @@
 package jsdays
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -18,7 +17,7 @@ func init() {
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
-	if err := withLayout("home", "templates/index.tmpl").Execute(w, map[string]string{"Pagetitle": "Task Overview"}); err != nil {
+	if err := withLayout("index", "templates/index.tmpl").Execute(w, map[string]string{"Pagetitle": "Task Overview"}); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
