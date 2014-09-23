@@ -9,3 +9,12 @@ body {
     text-shadow: 1px 1px; #202020;
 
 }
+.about {
+    width:60%;
+    height:60%;
+    margin:auto;
+    margin-top:14px;
+}
+.jumbotron {
+    background-color:oldlace;
+}
