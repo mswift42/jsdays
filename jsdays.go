@@ -14,6 +14,7 @@ func withLayout(name, templ string) *template.Template {
 func init() {
 	http.HandleFunc("/", home)
 	http.HandleFunc("/about", about)
+	http.HandleFunc("/newtask", newtask)
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
@@ -24,6 +25,11 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 func about(w http.ResponseWriter, r *http.Request) {
 	if err := withLayout("about", "templates/about.tmpl").Execute(w, map[string]string{"Pagetitle": "About"}); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+func newtask(w http.ResponseWriter, r *http.Request) {
+	if err := withLayout("newtask", "templates/newtask.tmpl").Execute(w, map[string]string{"Pagetitle": "New Task"}); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
