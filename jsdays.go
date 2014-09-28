@@ -2,7 +2,7 @@ package jsdays
 
 import (
 	"github.com/jinzhu/gorm"
-	"github.com/mattn/go-sqlite3"
+	_ "github.com/mattn/go-sqlite3"
 	"html/template"
 	"net/http"
 )
@@ -15,6 +15,14 @@ type Task struct {
 	Content   string
 	Status    string
 	Scheduled string
+}
+
+func createTable(t Task) {
+	db, err := gorm.Open("sqlite3", "days.db")
+	if err != nil {
+		panic(err)
+	}
+	db.CreateTable(&t)
 }
 
 // withLayout - take a template name and a templatefile
