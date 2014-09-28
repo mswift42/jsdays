@@ -1,9 +1,21 @@
 package jsdays
 
 import (
+	"github.com/jinzhu/gorm"
+	"github.com/mattn/go-sqlite3"
 	"html/template"
 	"net/http"
 )
+
+// Task consists of a Summary and the Task Content,
+// both strings, the task status, "Done" or "TODO"
+// and a scheduled Date.
+type Task struct {
+	Summary   string
+	Content   string
+	Status    string
+	Scheduled string
+}
 
 // withLayout - take a template name and a templatefile
 // and return it combined with layout.tmpl.
