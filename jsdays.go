@@ -1,8 +1,8 @@
 package jsdays
 
 import (
-	"github.com/jinzhu/gorm"
-	_ "github.com/mattn/go-sqlite3"
+	"appengine"
+	"appengine/datastore"
 	"html/template"
 	"net/http"
 )
@@ -11,18 +11,11 @@ import (
 // both strings, the task status, "Done" or "TODO"
 // and a scheduled Date.
 type Task struct {
-	Summary   string
-	Content   string
-	Status    string
-	Scheduled string
-}
-
-func createTable(t Task) {
-	db, err := gorm.Open("sqlite3", "days.db")
-	if err != nil {
-		panic(err)
-	}
-	db.CreateTable(&t)
+	Id        int64  `json:"id" datastore:"-"`
+	Summary   string `json:"summary"`
+	Content   string `json:"content" datastore:",noindex"`
+	Status    string `json:"status"`
+	Scheduled string `json:"scheduled"`
 }
 
 // withLayout - take a template name and a templatefile
