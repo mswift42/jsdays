@@ -18,6 +18,10 @@ type Task struct {
 	Scheduled string `json:"scheduled"`
 }
 
+func defaultTaskList(c appengine.Context) *datastore.Key {
+	return datastore.NewKey(c, "Task", "default_tasklist", 0, nil)
+}
+
 // withLayout - take a template name and a templatefile
 // and return it combined with layout.tmpl.
 func withLayout(name, templ string) *template.Template {
