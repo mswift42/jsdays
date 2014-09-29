@@ -65,7 +65,12 @@ func init() {
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
-	if err := withLayout("index", "templates/index.tmpl").Execute(w, map[string]string{"Pagetitle": "Task Overview"}); err != nil {
+	c := appengine.NewContext(r)
+	tasks, err := listTasks(c)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	if err := withLayout("index", "templates/index.tmpl").Execute(w, map[string]interface{}{"Pagetitle": "Task Overview", "tasks": tasks}); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
