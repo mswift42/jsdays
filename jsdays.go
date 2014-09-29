@@ -5,6 +5,7 @@ import (
 	"appengine/datastore"
 	"html/template"
 	"net/http"
+	"strconv"
 )
 
 // Task consists of a Summary and the Task Content,
@@ -88,12 +89,11 @@ func newtask(w http.ResponseWriter, r *http.Request) {
 }
 func savetask(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
-	key := datastore.NewIncompleteKey(c, "Task", defaultTaskList(c))
 	t := Task{Summary: r.FormValue("formsummary"),
 		Content:   r.FormValue("formcontent"),
 		Scheduled: r.FormValue("formscheduled"),
 		Status:    "TODO"}
-	if _, err := datastore.Put(c, key, &t); err != nil {
+	if _, err := t.save(c); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -101,13 +101,16 @@ func savetask(w http.ResponseWriter, r *http.Request) {
 }
 func edittask(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
-	id := r.FormValue("taskid")
-	var edittask []Task
+	id, err := strconv.ParseInt(r.FormValue("taskid"), 10, 64)
+	if err != nil {
+		panic(err)
+	}
+	var edittask Task
 	q := datastore.NewQuery("Task").Filter("Id =", id)
 	q.GetAll(c, &edittask)
 	withLayout("edittask", "templates/edittask.tmpl").Execute(w,
 		map[string]interface{}{"Pagetitle": "Edit Tasks",
-			"Summary": edittask[0].Summary, "Content": edittask[0].Content, "Taskid": id,
-			"Scheduled": edittask[0].Scheduled,
-			"Status":    edittask[0].Status})
+			"Summary": edittask.Summary, "Content": edittask.Content, "Taskid": id,
+			"Scheduled": edittask.Scheduled,
+			"Status":    edittask.Status})
 }
