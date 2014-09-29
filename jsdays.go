@@ -26,7 +26,7 @@ func defaultTaskList(c appengine.Context) *datastore.Key {
 
 func (t *Task) key(c appengine.Context) *datastore.Key {
 	if t.Id == 0 {
-		return datastore.NewIncompleteKey(c, "Task", default_tasklist(c))
+		return datastore.NewIncompleteKey(c, "Task", defaultTaskList(c))
 	}
 	return datastore.NewKey(c, "Task", "", t.Id, defaultTaskList(c))
 }
@@ -61,6 +61,7 @@ func init() {
 	http.HandleFunc("/", home)
 	http.HandleFunc("/about", about)
 	http.HandleFunc("/newtask", newtask)
+	http.HandleFunc("/savetask", savetask)
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
@@ -81,7 +82,7 @@ func newtask(w http.ResponseWriter, r *http.Request) {
 }
 func savetask(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
-	key := datastore.NewIncompleteKey(c, "Task", tasklistkey(c))
+	key := datastore.NewIncompleteKey(c, "Task", defaultTaskList(c))
 	t := Task{Summary: r.FormValue("formsummary"),
 		Content:   r.FormValue("formcontent"),
 		Scheduled: r.FormValue("formscheduled"),
