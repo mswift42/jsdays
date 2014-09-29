@@ -1,0 +1,37 @@
+{{define "edittask"}}
+{{template "layout" .}}
+<div class="container">
+  <h2 class="header">Edit Task</h2>
+  <form class="form-horizontal" action="/updatetask" method="post">
+    <fieldset>
+      <div class="content">
+        <div class="control-group">
+          <label class="control-label" for="textinput">Task Summary</label>
+          <div class="controls">
+            <input id="textinput" name="formsummary"  class="form-control" type="text" value={{.Summary}}>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="tarea">Task Contents</label>
+          <div class="controls">
+            <textarea class="form-control" name="formcontent" value={{.Content}} id="tarea" rows="5"></textarea>
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="scheduled" class="col-md-4 control-label">Scheduled</label>
+          <p class="glyphicon glyphicon-pencil"></p>
+          <div class="controls">
+            <input type="text" class="datepicker" name="formscheduled" value={{.Scheduled}} />
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <button id="singlebutton" name="submitbutton" class="btn">Submit</button>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+</div>
+{{end}}
