@@ -18,8 +18,37 @@ type Task struct {
 	Scheduled string `json:"scheduled"`
 }
 
+// defaultTaskList - return a new datastore key for a given
+// http request context.
 func defaultTaskList(c appengine.Context) *datastore.Key {
 	return datastore.NewKey(c, "Task", "default_tasklist", 0, nil)
+}
+
+func (t *Task) key(c appengine.Context) *datastore.Key {
+	if t.Id == 0 {
+		return datastore.NewIncompleteKey(c, "Task", default_tasklist(c))
+	}
+	return datastore.NewKey(c, "Task", "", t.Id, defaultTaskList(c))
+}
+
+func (t *Task) save(c appengine.Context) (*Task, error) {
+	k, err := datastore.Put(c, t.key(c), t)
+	if err != nil {
+		return nil, err
+	}
+	t.Id = k.IntID()
+	return t, nil
+}
+func listTasks(c appengine.Context) ([]Task, error) {
+	tasks := []Task{}
+	ks, err := datastore.NewQuery("Task").Ancestor(defaultTaskList(c)).Order("Status").Order("-Scheduled").GetAll(c, &tasks)
+	if err != nil {
+		return nil, err
+	}
+	for i := 0; i < len(tasks); i++ {
+		tasks[i].Id = ks[i].IntID()
+	}
+	return tasks, nil
 }
 
 // withLayout - take a template name and a templatefile
