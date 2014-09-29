@@ -62,6 +62,7 @@ func init() {
 	http.HandleFunc("/about", about)
 	http.HandleFunc("/newtask", newtask)
 	http.HandleFunc("/savetask", savetask)
+	http.HandleFunc("/edittask", edittask)
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
@@ -97,4 +98,16 @@ func savetask(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	http.Redirect(w, r, "/", http.StatusFound)
+}
+func edittask(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	id := r.FormValue("taskid")
+	var edittask []Task
+	q := datastore.NewQuery("Task").Filter("Id =", id)
+	q.GetAll(c, &edittask)
+	withLayout("edittask", "templates/edittask.tmpl").Execute(w,
+		map[string]interface{}{"Pagetitle": "Edit Tasks",
+			"Summary": edittask[0].Summary, "Content": edittask[0].Content, "Taskid": id,
+			"Scheduled": edittask[0].Scheduled,
+			"Status":    edittask[0].Status})
 }
