@@ -79,3 +79,16 @@ func newtask(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
+func savetask(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	key := datastore.NewIncompleteKey(c, "Task", tasklistkey(c))
+	t := Task{Summary: r.FormValue("formsummary"),
+		Content:   r.FormValue("formcontent"),
+		Scheduled: r.FormValue("formscheduled"),
+		Status:    r.FormValue("formstatus")}
+	if _, err := datastore.Put(c, key, &t); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	http.Redirect(w, r, "/", http.StatusFound)
+}
