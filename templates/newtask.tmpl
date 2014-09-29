@@ -10,20 +10,20 @@
         <div class="control-group">
           <label class="control-label" for="textinput">Task Summary</label>
           <div class="controls">
-            <input id="textinput" name="tinput" class="form-control input-md" type="text">
+            <input id="textinput" name="formsummary" class="form-control input-md" type="text">
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="tarea">Task Contents</label>
           <div class="controls">
-            <textarea class="form-control" name="tarea" id="tarea" rows="5"></textarea>
+            <textarea class="form-control" name="formcontent" id="tarea" rows="5"></textarea>
           </div>
         </div>
         <div class="control-group">
           <label for="scheduled" class="col-md-4 control-label">Scheduled</label>
           <p class="glyphicon glyphicon-pencil"></p>
           <div class="controls">
-            <input type="text" class="datepicker" name="scheduled" value={{.Today}}/>
+            <input type="text" class="datepicker" name="formscheduled" value={{.Today}}/>
           </div>
         </div>
         <div class="control-group">
