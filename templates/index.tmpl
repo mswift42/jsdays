@@ -1,6 +1,24 @@
 {{define "index"}}
 {{template "layout" .}}
 <header>
-    <h2 id="header">Days - Do All Your Stuff!</h2>
+  <h2 id="header">Days - Do All Your Stuff!</h2>
 </header>
+<div class="taskoverview">
+  {{range .tasks}}
+  <div class="singletask">
+    <div class="taskstatus">
+      <p>{{.Status}}</p>
+    </div>
+    <div class="tasksummary">
+      <h4 id={{.Id}} class="header">{{.Summary}}</h4>
+    </div>
+    <div class="taskcontent">
+      <pre>{{.Content}}</pre>
+    </div>
+    <div class="scheduled">
+      <p>{{.Scheduled}}</p>
+    </div>
+  </div>
+</div>
+{{end}}
 {{end}}
