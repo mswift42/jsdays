@@ -91,7 +91,7 @@ func savetask(w http.ResponseWriter, r *http.Request) {
 	t := Task{Summary: r.FormValue("formsummary"),
 		Content:   r.FormValue("formcontent"),
 		Scheduled: r.FormValue("formscheduled"),
-		Status:    r.FormValue("formstatus")}
+		Status:    "TODO"}
 	if _, err := datastore.Put(c, key, &t); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
