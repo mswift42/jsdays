@@ -9,6 +9,10 @@ body {
     text-shadow: 1px 1px; #202020;
 
 }
+.taskoverview {
+    width:60%;
+    margin:0 auto;
+}
 .about {
     width:60%;
     height:60%;

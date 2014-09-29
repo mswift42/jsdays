@@ -18,7 +18,13 @@
     <div class="scheduled">
       <p>{{.Scheduled}}</p>
     </div>
+    <form action="/edittask" method="post">
+      <input type="hidden" value={{.Id}} name="taskid"/>
+      <div class="taskinline">
+        <input type="submit" value="Edit Task" class="btn"/>
+      </div>
+    </form>
   </div>
+  {{end}}
 </div>
-{{end}}
 {{end}}
