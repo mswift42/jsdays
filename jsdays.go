@@ -69,6 +69,7 @@ func init() {
 	http.HandleFunc("/newtask", newtask)
 	http.HandleFunc("/savetask", savetask)
 	http.HandleFunc("/edittask", edittask)
+	http.HandleFunc("/updatetask", updatetask)
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
@@ -114,7 +115,30 @@ func edittask(w http.ResponseWriter, r *http.Request) {
 	}
 	withLayout("edittask", "templates/edittask.tmpl").Execute(w,
 		map[string]interface{}{"Pagetitle": "Edit Tasks",
-			"Summary": edittask.Summary, "Content": edittask.Content, "Taskid": id,
+			"Summary": edittask.Summary,
+			"Content": edittask.Content, "Taskid": id,
 			"Scheduled": edittask.Scheduled,
 			"Status":    edittask.Status})
+}
+func updatetask(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	id, _ := strconv.ParseInt(r.FormValue("taskid"), 10, 64)
+	var task Task
+	key := keyForID(c, id)
+	if err := datastore.Get(c, key, &task); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	if btn := r.FormValue("taskidbutton"); btn == "delete" {
+		datastore.Delete(c, key)
+	} else {
+		task.Summary = r.FormValue("formsummary")
+		task.Content = r.FormValue("formcontent")
+		task.Status = r.FormValue("formstatus")
+		task.Scheduled = r.FormValue("formscheduled")
+		if _, err := datastore.Put(c, key, task); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	}
+	http.Redirect(w, r, "/", http.StatusFound)
 }
