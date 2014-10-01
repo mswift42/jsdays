@@ -106,10 +106,7 @@ func savetask(w http.ResponseWriter, r *http.Request) {
 }
 func edittask(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
-	id, pe := strconv.ParseInt(r.FormValue("taskid"), 10, 64)
-	if pe != nil {
-		panic(pe)
-	}
+	id, _ := strconv.ParseInt(r.FormValue("taskid"), 10, 64)
 	var edittask Task
 	key := keyForID(c, id)
 	if err := datastore.Get(c, key, &edittask); err != nil {
