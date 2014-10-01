@@ -32,6 +32,11 @@ func (t *Task) key(c appengine.Context) *datastore.Key {
 	return datastore.NewKey(c, "Task", "", t.Id, defaultTaskList(c))
 }
 
+// keyForID - return the datastore.Key for a given IntID
+func keyForID(c appengine.Context, id int64) *datastore.Key {
+	return datastore.NewKey(c, "Task", "", id, defaultTaskList(c))
+}
+
 func (t *Task) save(c appengine.Context) (*Task, error) {
 	k, err := datastore.Put(c, t.key(c), t)
 	if err != nil {
@@ -101,13 +106,15 @@ func savetask(w http.ResponseWriter, r *http.Request) {
 }
 func edittask(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
-	id, err := strconv.ParseInt(r.FormValue("taskid"), 10, 64)
-	if err != nil {
-		panic(err)
+	id, pe := strconv.ParseInt(r.FormValue("taskid"), 10, 64)
+	if pe != nil {
+		panic(pe)
 	}
 	var edittask Task
-	q := datastore.NewQuery("Task").Filter("Id =", id)
-	q.GetAll(c, &edittask)
+	key := keyForID(c, id)
+	if err := datastore.Get(c, key, &edittask); err != nil {
+		panic(err)
+	}
 	withLayout("edittask", "templates/edittask.tmpl").Execute(w,
 		map[string]interface{}{"Pagetitle": "Edit Tasks",
 			"Summary": edittask.Summary, "Content": edittask.Content, "Taskid": id,
