@@ -122,7 +122,10 @@ func edittask(w http.ResponseWriter, r *http.Request) {
 }
 func updatetask(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
-	id, _ := strconv.ParseInt(r.FormValue("taskid"), 10, 64)
+	id, err := strconv.ParseInt(r.FormValue("taskid"), 10, 64)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 	var task Task
 	key := keyForID(c, id)
 	if err := datastore.Get(c, key, &task); err != nil {
@@ -135,7 +138,7 @@ func updatetask(w http.ResponseWriter, r *http.Request) {
 		task.Content = r.FormValue("formcontent")
 		task.Status = r.FormValue("formstatus")
 		task.Scheduled = r.FormValue("formscheduled")
-		if _, err := datastore.Put(c, key, task); err != nil {
+		if _, err := datastore.Put(c, key, &task); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
