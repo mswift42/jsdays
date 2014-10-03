@@ -131,7 +131,7 @@ func updatetask(w http.ResponseWriter, r *http.Request) {
 	if err := datastore.Get(c, key, &task); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
-	if btn := r.FormValue("taskidbutton"); btn == "delete" {
+	if btn := r.FormValue("submitbutton"); btn == "delete" {
 		datastore.Delete(c, key)
 	} else {
 		task.Summary = r.FormValue("formsummary")
