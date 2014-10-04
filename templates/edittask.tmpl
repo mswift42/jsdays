@@ -8,18 +8,18 @@
         <div class="control-group">
           <label class="control-label" for="textinput">Task Summary</label>
           <div class="controls">
-            <input id="textinput" name="formsummary"  class="form-control" type="text" value={{.Summary}}>
+            <input required id="textinput" name="formsummary"  class="form-control" type="text" value={{.Summary}}>
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="tarea">Task Contents</label>
           <div class="controls">
-            <textarea class="form-control" name="formcontent" value={{.Content}} id="tarea" rows="5">{{.Content}}</textarea>
+            <textarea required class="form-control" name="formcontent" value={{.Content}} id="tarea" rows="5">{{.Content}}</textarea>
           </div>
         </div>
         <div class="control-group">
           <label for="scheduled" class="col-md-4 control-label">Scheduled</label>
-          <p class="glyphicon glyphicon-pencil"></p>
+          <p class="glyphicon glyphicon-calendar"></p>
           <div class="controls">
             <input  class="datepicker" name="formscheduled" value={{.Scheduled}} />
           </div>
