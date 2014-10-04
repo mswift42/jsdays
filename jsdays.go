@@ -120,9 +120,14 @@ func edittask(w http.ResponseWriter, r *http.Request) {
 			"Scheduled": edittask.Scheduled,
 			"Status":    edittask.Status})
 }
+
+// updatetask - retrieve task with id 'id'.
+// If delete button is pressed, delete task in datastore
+// else update it's contents.
 func updatetask(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	id, err := strconv.ParseInt(r.FormValue("taskid"), 10, 64)
+	status := r.FormValue("taskstatus")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
@@ -138,7 +143,10 @@ func updatetask(w http.ResponseWriter, r *http.Request) {
 		task.Content = r.FormValue("formcontent")
 		task.Status = r.FormValue("formstatus")
 		task.Scheduled = r.FormValue("formscheduled")
-		if _, err := datastore.Put(c, key, &task); err != nil {
+		if status == "on" {
+			task.Status = "DONE"
+		}
+		if _, err := task.save(c); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
