@@ -1,8 +1,10 @@
 {{define "layout"}}
 <!doctype HTML>
 <head>
-   <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-   <link href="/css/main.css" rel="stylesheet"/>
+  <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet"/>
+  <link href="/bower_components/bootstrap-3-datepicker/css/datepicker3.css" rel="stylesheet">
   <title>DAYS - {{.Pagetitle}}</title>
 </head>
 <body>
@@ -21,15 +23,16 @@
           </li>
         </ul>
         <div class="bannerheader">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="active navbar-right">
-            <p class="navbar-text"><strong>DAYS - Do All Your Stuff</strong></p>
-          </li>
-        </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active navbar-right">
+              <p class="navbar-text"><strong>DAYS - Do All Your Stuff</strong></p>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </nav>
+  <script src="/bower_components/bootstrap-3-datepicker/js/bootstrap-datepicker.js"></script>
   <script src="/js/utilities.js"></script>
   <script src="/js/main.js"></script>
 </body>
