@@ -14,14 +14,14 @@
         <div class="control-group">
           <label class="control-label" for="tarea">Task Contents</label>
           <div class="controls">
-            <textarea class="form-control" name="formcontent" value={{.Content}} id="tarea" rows="5"></textarea>
+            <textarea class="form-control" name="formcontent" value={{.Content}} id="tarea" rows="5">{{.Content}}</textarea>
           </div>
         </div>
         <div class="control-group">
           <label for="scheduled" class="col-md-4 control-label">Scheduled</label>
           <p class="glyphicon glyphicon-pencil"></p>
           <div class="controls">
-            <input type="text" class="datepicker" name="formscheduled" value={{.Scheduled}} />
+            <input  class="datepicker" name="formscheduled" value={{.Scheduled}} />
           </div>
         </div>
         <div class="control-group">
