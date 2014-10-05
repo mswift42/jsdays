@@ -22,8 +22,13 @@ body {
 .jumbotron {
     background-color:oldlace;
 }
+.outer {
+    display:inline;
+    margin:8px 8px 8px 8px;
+}
 
 .singletask {
+    margin-top:8px;
     background-color:oldlace;
     padding:8px;
     border-radius:6px 6px 6px 8px;
