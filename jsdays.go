@@ -47,7 +47,7 @@ func (t *Task) save(c appengine.Context) (*Task, error) {
 }
 func listTasks(c appengine.Context) ([]Task, error) {
 	tasks := []Task{}
-	ks, err := datastore.NewQuery("Task").Ancestor(defaultTaskList(c)).Order("Status").Order("-Scheduled").GetAll(c, &tasks)
+	ks, err := datastore.NewQuery("Task").Ancestor(defaultTaskList(c)).Order("-Status").Order("-Scheduled").GetAll(c, &tasks)
 	if err != nil {
 		return nil, err
 	}
@@ -55,6 +55,12 @@ func listTasks(c appengine.Context) ([]Task, error) {
 		tasks[i].Id = ks[i].IntID()
 	}
 	return tasks, nil
+}
+
+// TaskDone - if Task.Status is == "DONE'
+// return true else false
+func (t *Task) TaskDone() bool {
+	return t.Status == "DONE"
 }
 
 // withLayout - take a template name and a templatefile
@@ -118,7 +124,8 @@ func edittask(w http.ResponseWriter, r *http.Request) {
 			"Summary": edittask.Summary,
 			"Content": edittask.Content, "Taskid": id,
 			"Scheduled": edittask.Scheduled,
-			"Status":    edittask.Status})
+			"Status":    edittask.Status,
+			"Done":      edittask.TaskDone()})
 }
 
 // updatetask - retrieve task with id 'id'.
@@ -143,8 +150,11 @@ func updatetask(w http.ResponseWriter, r *http.Request) {
 		task.Content = r.FormValue("formcontent")
 		task.Status = r.FormValue("formstatus")
 		task.Scheduled = r.FormValue("formscheduled")
+		task.Id = id
 		if status == "on" {
 			task.Status = "DONE"
+		} else {
+			task.Status = "TODO"
 		}
 		if _, err := task.save(c); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
