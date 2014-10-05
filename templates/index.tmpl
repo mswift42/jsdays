@@ -17,7 +17,7 @@
       <pre>{{.Content}}</pre>
     </div>
     <div class="scheduled">
-      <p>{{.Scheduled}}</p>
+      <p id="scheduleddate">{{.Scheduled}}</p>
     </div>
     <form action="/edittask" method="post">
       <input type="hidden" value={{.Id}} name="taskid"/>

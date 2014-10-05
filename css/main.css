@@ -167,3 +167,9 @@ body {
     width:70%;
     margin:auto;
 }
+.controls {
+    padding:6px;
+}
+.control-label {
+    padding:6px;
+}
