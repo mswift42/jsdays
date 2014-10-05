@@ -1,9 +1,10 @@
 {{define "newtask"}}
 {{template "layout" .}}
 <div class="container">
-  <h2 class="header">New Task</h2>
+  <h2 id="header">New Task</h2>
   <br/>
   <br/>
+  <div class="taskform">
   <form class="form-horizontal" method="post" id="postform" action="/savetask">
     <fieldset>
       <div class="content">
@@ -20,21 +21,22 @@
           </div>
         </div>
         <div class="control-group">
-          <label for="scheduled" class="col-md-4 control-label">Scheduled</label>
-          <p class="glyphicon glyphicon-pencil"></p>
+          <label for="scheduled" class="control-label">Scheduled</label>
           <div class="controls">
             <input  class="datepicker" name="formscheduled" />
+          <p class="glyphicon glyphicon-calendar"></p>
           </div>
         </div>
         <div class="control-group">
           <div class="controls">
-            <button id="singlebutton" name="submitbutton" class="btn">Submit</button>
+            <button id="singlebutton" name="submitbutton" class="btn btn-default">Submit</button>
           </div>
         </div>
       </div>
 </div>
 </fieldset>
 </form>
+</div>
 </div>
 </div>
 {{end}}

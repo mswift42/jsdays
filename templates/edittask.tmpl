@@ -1,7 +1,8 @@
 {{define "edittask"}}
 {{template "layout" .}}
 <div class="container">
-  <h2 class="header">Edit Task</h2>
+  <h2 id="header">Edit Task</h2>
+  <div class="taskform">
   <form class="form-horizontal" action="/updatetask" method="post">
     <fieldset>
       <div class="content">
@@ -18,10 +19,10 @@
           </div>
         </div>
         <div class="control-group">
-          <label for="scheduled" class="col-md-4 control-label">Scheduled</label>
-          <p class="glyphicon glyphicon-calendar"></p>
+          <label for="scheduled" class="control-label">Scheduled</label>
           <div class="controls">
             <input  class="datepicker" name="formscheduled" value={{.Scheduled}} />
+          <p class="glyphicon glyphicon-calendar"></p>
           </div>
         </div>
         <div class="control-group">
@@ -36,6 +37,7 @@
       </div>
     </fieldset>
   </form>
+  </div>
 </div>
 </div>
 {{end}}

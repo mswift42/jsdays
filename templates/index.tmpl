@@ -5,6 +5,7 @@
 </header>
 <div class="taskoverview">
   {{range .tasks}}
+  <div class="outer">
   <div class="singletask">
     <div class="taskstatus">
       <p>{{.Status}}</p>
@@ -21,10 +22,11 @@
     <form action="/edittask" method="post">
       <input type="hidden" value={{.Id}} name="taskid"/>
       <div class="taskinline">
-        <input type="submit" value="Edit Task" class="btn"/>
+        <input type="submit" value="Edit Task" class="btn btn-default"/>
       </div>
     </form>
   </div>
+</div>
   {{end}}
 </div>
 {{end}}
