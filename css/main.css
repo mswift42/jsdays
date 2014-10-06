@@ -189,3 +189,6 @@ body {
 .control-label {
     padding:6px;
 }
+pre {
+    background-color:#fff4df;
+}
