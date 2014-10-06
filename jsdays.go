@@ -117,7 +117,7 @@ func edittask(w http.ResponseWriter, r *http.Request) {
 	var edittask Task
 	key := keyForID(c, id)
 	if err := datastore.Get(c, key, &edittask); err != nil {
-		panic(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	withLayout("edittask", "templates/edittask.tmpl").Execute(w,
 		map[string]interface{}{"Pagetitle": "Edit Tasks",
