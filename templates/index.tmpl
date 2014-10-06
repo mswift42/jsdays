@@ -6,8 +6,8 @@
 <div class="taskoverview">
   {{range .tasks}}
   <div class="outer">
-  <div class="singletask">
-    <div class="taskstatus">
+  <div id="singletask" class="singletask">
+    <div class="taskstatus" id="taskstatus">
       <p>{{.Status}}</p>
     </div>
     <div class="tasksummary">
