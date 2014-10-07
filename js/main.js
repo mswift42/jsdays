@@ -28,12 +28,9 @@ function readDate(datestring) {
 
 function filterDone() {
     "use strict";
-    var done = $('.statustext').filter(function() {
+    return $('.statustext').filter(function() {
         return $(this).text() === "TODO";
     });
-    return done;
-
-    // return $(done).parent().parent();
 }
 
 
