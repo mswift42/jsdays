@@ -31,13 +31,14 @@ function filterDone() {
         return $(this).text() === "TODO";
     });
 }
-
+// indToMonth - return the month abbreviation
+// for the month index of a date object.
 function indToMonth(i) {
     'use strict';
     return ['Jan','Feb','Mar',
             'Apr','May', 'Jun',
-            'Jul', 'Aug', 'Oct',
-            'Nov', 'Dec'][i];
+            'Jul', 'Aug', 'Sep',
+            'Oct', 'Nov', 'Dec'][i];
 }
 
 // muteTask - Check if task.Status == "DONE".
