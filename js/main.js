@@ -22,7 +22,6 @@ $(document).ready(function() {
 });
 
 function readDate(datestring) {
-
     return new Date(datestring);
 }
 
@@ -33,7 +32,13 @@ function filterDone() {
     });
 }
 
-
+function indToMonth(i) {
+    'use strict';
+    return ['Jan','Feb','Mar',
+            'Apr','May', 'Jun',
+            'Jul', 'Aug', 'Oct',
+            'Nov', 'Dec'][i];
+}
 
 // muteTask - Check if task.Status == "DONE".
 // if it is set textcolor to a light grey to make it less visible.
