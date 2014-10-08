@@ -19,3 +19,9 @@ function indToWeekDay(i) {
 function readDate(datestring) {
     return new Date(datestring);
 }
+// addDays - add n days to a given
+// date object.
+function addDays(day, n) {
+    var nday = new Date();
+    return nday.setDate(day.getDate() + n);
+}
