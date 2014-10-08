@@ -28,7 +28,7 @@ function addDays(day, n) {
 }
 // buildAgenda - return an array of 10 days
 // from startday - 3 days to + 7 days.
-function buildAgenda(startday) {
+function weekDates(startday) {
     'use strict';
     var dates = [];
     for (var i = -3 ; i<8 ; i++) {
@@ -36,4 +36,12 @@ function buildAgenda(startday) {
         dates.push(day);
     }
     return dates;
+}
+
+// sameDay - compare two dates -
+// if both are on the same day return
+// true else false.
+function sameDay(day1, day2) {
+    'use strict';
+    return day1.getDate() === day2.getDate();
 }

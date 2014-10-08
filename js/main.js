@@ -30,6 +30,11 @@ function filterTodo() {
     });
 }
 
+function readScheduled(task) {
+    'use strict';
+    return new Date($(task).find('.scheduleddate').text());
+}
+
 // muteTask - Check if task.Status == "DONE".
 // if it is set textcolor to a light grey to make it less visible.
 function muteTask() {
@@ -43,5 +48,33 @@ function muteTask() {
         }
     });
 }
+
+function Agenda(day) {
+    this.day = day;
+    this.task = null;
+}
+
+function buildAgenda(startday) {
+    var wd = weekDates(startday);
+    var res = [];
+    var tasks = $.makeArray(filterTodo());
+    console.log(tasks);
+    for (var i = 0; i<wd.length; i++) {
+        var ag = new Agenda(wd[i]);
+        for (var j = 0; j<tasks.length; j++) {
+            if (sameDay(wd[i], readScheduled(tasks[j]))) {
+                ag.task = tasks[j];
+            }
+        }
+        res.push(ag);
+    }
+    return res;
+}
+
+
+
+        
+
+
 
 window.onload = setActive;

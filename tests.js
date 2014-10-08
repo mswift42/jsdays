@@ -36,12 +36,24 @@ QUnit.test("test addDays", function(assert) {
     assert.equal(day7.getDate(),1);
 });
 
-QUnit.test("test buildAgenda", function(assert) {
+QUnit.test("test weekDates", function(assert) {
     var day = new Date(2014,10,1);
-    var ag = buildAgenda(day);
+    var ag = weekDates(day);
     assert.equal(ag[0].getDate(),28);
     assert.equal(ag[0].getMonth(), 8);
     assert.equal(ag[3].getDate(),1);
     assert.equal(ag[10].getDate(),8);
     assert.equal(ag.length,11);
+});
+
+QUnit.test("test sameDay", function(assert) {
+    var day1 = new Date(2014,10,1);
+    var day2 = new Date(2014,10,2);
+    var day3 = new Date(2014,10,1);
+    var day4 = new Date(2014,10,2);
+    assert.ok(sameDay(day1,day3));
+    assert.ok(sameDay(day2,day4));
+    assert.ok(sameDay(day1,day1));
+    assert.ok(!(sameDay(day1,day2)));
+    assert.ok(!(sameDay(day2,day3)));
 });
