@@ -21,11 +21,12 @@ $(document).ready(function() {
         todayHighlight:true});
 });
 
-
-function filterDone() {
+// return jquery object of .singletask divs
+// with a taskstatus of "TODO".
+function filterTodo() {
     "use strict";
-    return $('.statustext').filter(function() {
-        return $(this).text() === "TODO";
+    return $('.singletask').filter(function() {
+        return $(this).find('.statustext').text() === "TODO";
     });
 }
 
