@@ -40,6 +40,14 @@ function indToMonth(i) {
             'Jul', 'Aug', 'Sep',
             'Oct', 'Nov', 'Dec'][i];
 }
+// indToWeekDay - return the Weekday
+// for the getDay index method of a date object.
+function indToWeekDay(i) {
+    'use strict';
+    return ['Sunday', 'Monday', 'Tuesday',
+            'Wednesday', 'Thursday', 'Friday',
+            'Saturday'][i];
+}
 
 // muteTask - Check if task.Status == "DONE".
 // if it is set textcolor to a light grey to make it less visible.
