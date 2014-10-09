@@ -50,11 +50,13 @@ function muteTask() {
 }
 
 function Agenda(day) {
+    'use strict';
     this.day = day;
     this.tasks = [];
 }
 
 function buildAgenda(startday) {
+    'use strict';
     var wd = weekDates(startday);
     var res = [];
     var tasks = filterTodo();
@@ -68,6 +70,24 @@ function buildAgenda(startday) {
         res.push(ag);
     }
     return res;
+}
+
+function agendaHtml(startday) {
+    'use strict';
+    var ag = buildAgenda(startday);
+    var target = $('.agenda');
+    var ht = "";
+    for (var i = 0; i < ag.length; i++) {
+
+        ht += "<div class='singleag'>" + "<p>" +
+            formatDate(ag[0].day) + "</p>" + "</div>";
+        for (var j = 0; j < ag[i].tasks.length;j++) {
+            ht += "<div class='singleagtask'>" + "<p>" +
+                $(ag[i].tasks[j]).find('h4').text() + "</p></div>";
+        }
+
+    }
+    $(target).append(ht);
 }
 
 
