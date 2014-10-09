@@ -57,3 +57,14 @@ QUnit.test("test sameDay", function(assert) {
     assert.ok(!(sameDay(day1,day2)));
     assert.ok(!(sameDay(day2,day3)));
 });
+
+QUnit.test("test formatDate", function(assert) {
+    var day1 = new Date(2014,9,1);
+    var day2 = new Date(2014,9,2);
+    var day3 = new Date(2014,9,3);
+    var day4 = new Date(2014,0,1);
+    assert.equal(formatDate(day1), "Wednesday, Oct 1 2014");
+    assert.equal(formatDate(day2), "Thursday, Oct 2 2014");
+    assert.equal(formatDate(day3), "Friday, Oct 3 2014");
+    assert.equal(formatDate(day4), "Wednesday, Jan 1 2014");
+});

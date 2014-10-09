@@ -36,7 +36,7 @@ function weekDates(startday) {
         dates.push(day);
     }
     return dates;
-}
+
 
 // sameDay - compare two dates -
 // if both are on the same day return
@@ -44,4 +44,9 @@ function weekDates(startday) {
 function sameDay(day1, day2) {
     'use strict';
     return day1.getDate() === day2.getDate();
+}
+
+function formatDate(day) {
+    'use strict';
+    return indToWeekDay(day.getDay()) + ", " + indToMonth(day.getMonth()) + " " + day.getDate() + " " + day.getFullYear();
 }
