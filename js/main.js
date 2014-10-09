@@ -15,6 +15,7 @@ function setActive() {
 $(document).ready(function() {
     setActive();
     muteTask();
+    agendaHtml(new Date());
     $('.datepicker').datepicker({
         autoclose:true,
         format:"DD, M dd yyyy",
@@ -80,10 +81,11 @@ function agendaHtml(startday) {
     for (var i = 0; i < ag.length; i++) {
 
         ht += "<div class='singleag'>" + "<p>" +
-            formatDate(ag[0].day) + "</p>" + "</div>";
+            formatDate(ag[i].day) + "</p>" + "</div>";
         for (var j = 0; j < ag[i].tasks.length;j++) {
-            ht += "<div class='singleagtask'>" + "<p>" +
-                $(ag[i].tasks[j]).find('h4').text() + "</p></div>";
+            ht += "<div class='singleagtask'>" +
+                "<a href=#" + $(ag[i].tasks[j]).find('#hiddenid').val() + ">" +
+                $(ag[i].tasks[j]).find('h4').text() + "</a></div>";
         }
 
     }

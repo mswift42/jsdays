@@ -36,6 +36,7 @@ function weekDates(startday) {
         dates.push(day);
     }
     return dates;
+}
 
 
 // sameDay - compare two dates -
