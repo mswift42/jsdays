@@ -92,6 +92,15 @@ function agendaHtml(startday) {
     $(target).append(ht);
 }
 
+function muteNonTask() {
+    'use strict';
+    var ag = $('.singleag');
+    for (var i = 0; i < ag.length; i++) {
+        if ($(ag[i]).next().find('a').length===0) {
+            $(ag[i]).css('color',"#a2a2a2");
+        }
+    }
+}
 
 
         
