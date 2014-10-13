@@ -16,6 +16,7 @@ $(document).ready(function() {
     setActive();
     muteTask();
     agendaHtml(new Date());
+    muteNonTask();
     $('.datepicker').datepicker({
         autoclose:true,
         format:"DD, M dd yyyy",
