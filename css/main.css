@@ -197,21 +197,22 @@ pre {
 }
 
 .agenda {
-    background-color:rgb(207,207,207);
+    background-color:oldlace;
     border-radius:6px;
     width:80%;
     margin:auto;
     text-align:center;
     box-shadow: 0px 6px 20px 0px #81afa2;
-    border:rgb(207,207,207);
+    border:oldlace;
     border-style:double;
 
 }
 
 .singleag {
     color:#3f5b32;
-    background-color:#e2e2e2;
+    background-color:#efefef;
     border-radius:1px;
+
     /* box-shadow: 1px 1px 2px #81afa2 inset; */
 }
 .aghead {
