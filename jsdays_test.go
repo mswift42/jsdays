@@ -36,7 +36,7 @@ func TestEditTask(t *testing.T) {
 
 }
 
-func TestKeyAndSave(t *testing.T) {
+func TestKeyAndSaveAndList(t *testing.T) {
 	c, err := aetest.NewContext(nil)
 	if err != nil {
 		t.Fatal(err)
@@ -58,5 +58,15 @@ func TestKeyAndSave(t *testing.T) {
 	k2id := k2.IntID()
 	if k2id != 222 {
 		t.Error("Expected 222, got: ", k2id)
+	}
+	tasks, err := listTasks(c)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if tasks[0].Id != 123 {
+		t.Error("Expected 123, got: ", tasks[0].Id)
+	}
+	if tasks[1].Id != 222 {
+		t.Error("Expected 222, got: ", tasks[1].Id)
 	}
 }
