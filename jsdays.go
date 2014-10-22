@@ -47,7 +47,7 @@ func (t *Task) save(c appengine.Context) (*Task, error) {
 }
 func listTasks(c appengine.Context) ([]Task, error) {
 	tasks := []Task{}
-	ks, err := datastore.NewQuery("Task").Ancestor(defaultTaskList(c)).Order("-Status").Order("-Scheduled").GetAll(c, &tasks)
+	ks, err := datastore.NewQuery("Task").Ancestor(defaultTaskList(c)).Order("-Status").Order("Scheduled").GetAll(c, &tasks)
 	if err != nil {
 		return nil, err
 	}
