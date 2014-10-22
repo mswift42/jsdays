@@ -35,3 +35,28 @@ func TestEditTask(t *testing.T) {
 	}
 
 }
+
+func TestKeyAndSave(t *testing.T) {
+	c, err := aetest.NewContext(nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t1 := Task{Summary: "some summary", Id: 123}
+	t2 := Task{Summary: "second summary", Id: 222}
+	if _, err := t1.save(c); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := t2.save(c); err != nil {
+		t.Fatal(err)
+	}
+	k1 := t1.key(c)
+	k1id := k1.IntID()
+	if k1id != 123 {
+		t.Error("Expected 123, got: ", k1id)
+	}
+	k2 := t2.key(c)
+	k2id := k2.IntID()
+	if k2id != 222 {
+		t.Error("Expected 222, got: ", k2id)
+	}
+}
