@@ -32,7 +32,7 @@ body {
 
 .singletask {
     margin-top:8px;
-    background-color:oldlace;
+    background-color:rgba(255,255,255,0.7);
     padding:20px;
     border-radius:6px 6px 6px 8px;
     border-style:solid;
@@ -222,4 +222,7 @@ pre {
 h3 > span {
     text-decoration:line-through;
     padding:4px;
+}
+.taskinfo {
+    display:none;
 }

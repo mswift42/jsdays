@@ -16,12 +16,13 @@
   {{range .tasks}}
   <div class="outer">
   <div id="singletask" class="singletask">
-    <div class="taskstatus" id="taskstatus">
-      <p class="statustext" id={{.Id}}>{{.Status}}</p>
-    </div>
+      <!-- <div class="taskstatus" id="taskstatus">
+         <p class="statustext" id={{.Id}}>{{.Status}}</p>
+         </div> -->
     <div class="tasksummary">
       <h4 id={{.Id}} class="header">{{.Summary}}</h4>
     </div>
+    <div class="taskinfo">
     <div class="taskcontent">
       <pre>{{.Content}}</pre>
     </div>
@@ -34,6 +35,7 @@
         <input type="submit" value="Edit Task" class="btn btn-default"/>
       </div>
     </form>
+    </div>
   </div>
 </div>
   {{end}}
