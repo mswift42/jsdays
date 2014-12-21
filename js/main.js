@@ -15,6 +15,7 @@ function setActive() {
 $(document).ready(function() {
     setActive();
     muteTask();
+    toggleTaskInfo();
     agendaHtml(new Date());
     muteNonTask();
     $('.datepicker').datepicker({
@@ -101,6 +102,15 @@ function muteNonTask() {
             $(ag[i]).css('color',"#a2a2a2");
         }
     }
+}
+
+function toggleTaskInfo () {
+    'use strict';
+    $('.singletask').click(
+        function() {
+            $(this).find('.taskinfo').toggle();
+});
+
 }
 
 
