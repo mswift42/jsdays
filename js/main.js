@@ -103,7 +103,8 @@ function muteNonTask() {
         }
     }
 }
-
+// show / hide taskcontent,the scheduled date
+// and the edit button of a task.
 function toggleTaskInfo () {
     'use strict';
     $('.singletask').click(
